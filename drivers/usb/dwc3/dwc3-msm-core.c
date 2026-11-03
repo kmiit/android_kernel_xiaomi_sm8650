@@ -74,7 +74,6 @@
 #define DWC3_GUSB3PIPECTL_DISRXDETU3	BIT(22)
 #define DWC3_GUCTL_SPRSCTRLTRANSEN	BIT(17)
 
-#define DWC3_LLUCTL	0xd024
 /* Force Gen1 speed on Gen2 link */
 #define DWC3_LLUCTL_FORCE_GEN1	BIT(10)
 
@@ -3752,7 +3751,7 @@ static void dwc3_dis_sleep_mode(struct dwc3_msm *mdwc)
 static void dwc3_force_gen1(struct dwc3_msm *mdwc)
 {
 	if (mdwc->force_gen1 && (mdwc->ip == DWC31_IP))
-		dwc3_msm_write_reg_field(mdwc->base, DWC3_LLUCTL, DWC3_LLUCTL_FORCE_GEN1, 1);
+		dwc3_msm_write_reg_field(mdwc->base, DWC3_LLUCTL(0), DWC3_LLUCTL_FORCE_GEN1, 1);
 }
 
 static int dwc3_msm_power_collapse_por(struct dwc3_msm *mdwc)
